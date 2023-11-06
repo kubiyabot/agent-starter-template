@@ -1,5 +1,9 @@
 FROM kubiya/base-profile:stable
 
+# Copy the use cases (actions directory)
+# Copy Kubiya actions and config
+COPY ./actions /tmp/workspace/.kubiya/
+
 # Add your layers here..
 # eg:
 # # Install terraform
