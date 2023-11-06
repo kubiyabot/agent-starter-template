@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Action
+metadata:
+  name: "Terraform use cases"
+  version: "1.0"
+# A GitHub token is required to use the GitHub API and clone repositories
+secrets: []
+env: {}
+integrations: []
+actions:
+  - title: Creating a new SQS queue
+    cmd: "gh"
+    args: 
+      - "repo"
+      - "clone"
+      - "https://github.com/terraform-aws-modules/terraform-aws-sqs"
+    ai_instruction: |
+        If users wants to create a new SQS FIFO queue, you can clone this repo and use the module `sqs` to create a new queue
+        You can discovery the module inputs by looking at the `variables.tf` file
+        You should ask the user for the name of the queue and the tags they want to use and build proper terraform.tfvars file so you can run `terraform init` and `terraform plan` to create the queue.
+        * - VERIFY THE PLAN WITH THE USER BEFORE APPLYING IT
+    strict: true
