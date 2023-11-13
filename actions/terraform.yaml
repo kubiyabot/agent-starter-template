@@ -1,22 +1,28 @@
 apiVersion: v1
-kind: Action
+kind: Actions
 metadata:
-  name: "Terraform use cases"
+  name: "Easy SQS Queue Creation"
   version: "1.0"
-# A GitHub token is required to use the GitHub API and clone repositories
-secrets: []
-env: {}
-integrations: []
+secrets: ["integration/aws"]
+env: 
+  KUBIYA_DEBUG: "1"
+  AWS_DEFAULT_REGION: eu-west-1
+
 actions:
-  - title: Creating a new SQS queue
-    cmd: "gh"
-    args: 
-      - "repo"
-      - "clone"
-      - "https://github.com/terraform-aws-modules/terraform-aws-sqs"
-    ai_instruction: |
-        If users wants to create a new SQS FIFO queue, you can clone this repo and use the module `sqs` to create a new queue
-        You can discovery the module inputs by looking at the `variables.tf` file
-        You should ask the user for the name of the queue and the tags they want to use and build proper terraform.tfvars file so you can run `terraform init` and `terraform plan` to create the queue.
-        * - VERIFY THE PLAN WITH THE USER BEFORE APPLYING IT
+  - title: "Set Up Your SQS Queue"
+    description: "Set up a new SQS queue in seconds using Terraform"
+    instructions: |
+        You can create a new SQS queue in seconds using Terraform.
+        
+        Your plan for such cases:
+        1. Clone the repository: https://github.com/terraform-aws-modules/terraform-aws-sqs
+        2. Cd into the repository
+        4. Read the variables.tf file to see what variables are required
+        5. Ask the user to provide the required variables
+        6. Create a terraform.tfvars file and populate it with the variables provided by the user
+        7. Run terraform init
+        8. Run terraform plan
+        9. Show the user the plan in both Terraform format and human-readable format
+        10. Ask the user to confirm the plan
+        11. Run terraform apply
     strict: true
