@@ -15,4 +15,3 @@ RUN apt update && apt install jq curl -y && curl -fL https://install-cli.jfrog.i
 RUN chown appuser /usr/local/bin/jf
 RUN chown appuser /usr/bin/jq
 USER appuser
-ENV JFROG_ACCESS_TOKEN=REDACTED_JWT
