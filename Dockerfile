@@ -1,4 +1,4 @@
-FROM kubiya/base-profile:latest
+FROM kubiya/base-agent:latest
 
 # Copy the use cases (actions directory)
 # Copy Kubiya actions and config
