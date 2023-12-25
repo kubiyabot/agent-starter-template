@@ -78,11 +78,8 @@ Follow these steps to set up and run Kubiya locally.
 In this section, you will learn how to configure and customize the Kubiya Agent starter template.
 
 ### Dockerfile
-The Dockerfile is responsible for building the Docker image and includes the following tools:
-
-### entry.sh Script
-This script is the entrypoint for the Docker container.
-For more information about entrypoints, see the [Docker documentation](https://docs.docker.com/engine/reference/builder/#entrypoint).
+The [Dockerfile](Dockerfile) is responsible for building the Docker image for the custom Kubiya Agent.
+You can customize the Dockerfile to include additional tools and configurations.
 
 ### Tools Installed
 The Dockerfile includes the following tools:
@@ -103,6 +100,9 @@ The Dockerfile includes the following tools:
 - gpg
 - curl
 
+### entry.sh Script
+This [entry.sh](entry.sh) script is the entrypoint for the Docker container.
+For more information about entrypoints, see the [Docker documentation](https://docs.docker.com/engine/reference/builder/#entrypoint).
 
 ### Contributing
 We welcome contributions! Follow our contribution guidelines to get started.
