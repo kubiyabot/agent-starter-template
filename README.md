@@ -1,6 +1,6 @@
  
 ![Kubiya](https://avatars.githubusercontent.com/u/87862858?s=200&v=4)
-# Kubiya Agent Starter template
+# Kubiya Agent Starter Template
 
 ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
 ![Terraform Badge](https://img.shields.io/badge/Terraform-844FBA?logo=terraform&logoColor=fff&style=for-the-badge)
@@ -71,7 +71,7 @@ Follow these steps to set up and run Kubiya locally.
 - Run the Docker container using the following command (replace ```username/image-name:tag``` with your own image name and tag):
 
   ```bash
-  docker run -it --rm rammatz/agent-test /bin/bash
+  docker run -it --rm username/image-name:tag /bin/bash
   ```
 
 ## Configuration
