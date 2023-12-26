@@ -1,4 +1,4 @@
-FROM kubiya/base-profile:latest
+FROM kubiya/base-profile:latest # TODO: Change ghcr.io/agent-core:latest
 
 USER root
 
@@ -57,6 +57,8 @@ RUN \
     # Install terraform
     wget https://releases.hashicorp.com/terraform/1.6.2/terraform_1.6.2_linux_amd64.zip && \
     unzip -o terraform_1.6.2_linux_amd64.zip -d /usr/local/bin/ && \
+    chmod +x /usr/local/bin/terraform && \
+    rm -rf terraform_1.6.2_linux_amd64.zip && \
 
     # Snyk CLI
     curl --compressed https://static.snyk.io/cli/latest/snyk-linux -o snyk && \
@@ -71,12 +73,15 @@ RUN \
 
 
 RUN chown appuser /usr/local/bin/argocd && \
+    chown appuser /usr/local/bin/terraform && \
     chown appuser /usr/local/bin/kubectl && \
     chown appuser /usr/local/bin/slack && \
     chown appuser /usr/local/bin/helm && \
     chown appuser /usr/local/bin/jira && \
     chown appuser /usr/local/bin/jf && \
     chown appuser /usr/bin/jq && \
+    chown appuser /usr/bin/gh && \
+    chown appuser /usr/bin/gcloud && \
     chown appuser /usr/local/bin/snyk
 
 USER appuser
