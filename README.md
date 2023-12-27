@@ -36,21 +36,21 @@
 ## Introduction
 Kubiya's Agent starter template is a Docker image that includes the [Kubiya Agent](https://docs.kubiya.ai/gen-2-docs/agents-experimental) with a collection of tools for managing your DevOps Stack through the power of LLM and AI.
 
-It is designed to be used as a base image for creating custom Kubiya Agents with a collection of tools and configurations designed to simplify the management of environments such as Kubernetes clusters, AWS, GitHub repositories,JIRA projects and more.
+It is designed to be used as a base image for creating custom Kubiya Agents with a collection of tools and configurations designed to simplify the management of environments such as Kubernetes clusters, AWS, GitHub repositories, JIRA projects and more.
 
 
 ## Prerequisites
 
 Before using the agent, ensure you have the following :
 - [Docker](https://www.docker.com/get-started/) installed on your machine.
-- Access to the Kubiya's [ghcr.io/kubiyabot/connections-agent-core:stable](https://hub.docker.com/r/kubiya/base-agent/tags) image:
+- Access to the Kubiya's [ghcr.io/kubiyabot/connection-agent-core](https://github.com/kubiyabot/connections/pkgs/container/connection-agent-core) image:
   ```shell
-  docker pull ghcr.io/kubiyabot/connections-agent-core:stable
+  docker pull ghcr.io/kubiyabot/connection-agent-core:934f77177849e576cc049580ee62bcfd806fae4e
   ```
   Should result in : 
   ```shell
-  Status: Downloaded newer image for kubiyabot/connections-agent-core:stable
-  ghcr.io/kubiyabot/connections-agent-core:stable
+  Status: Downloaded newer image for ghcr.io/kubiyabot/connection-agent-core:934f77177849e576cc049580ee62bcfd806fae4e
+  ghcr.io/kubiyabot/connection-agent-core:934f77177849e576cc049580ee62bcfd806fae4e
   ```
 - Kubiya runner installed on your cluster.   
 For more information, see the [Kubiya runner documentation](https://docs.kubiya.ai/gen-2-docs/connectors/custom-connections/action-runners).
@@ -72,7 +72,7 @@ Follow these steps to set up and run Kubiya locally.
     ```
   
 ### Running the Container
-- If you want to inspect the agent can run the Docker container using the following command (replace ```username/image-name:tag``` with your own image name and tag):
+- If you want to inspect the agent's Docker container , use the following command (replace ```username/image-name:tag``` with your own image name and tag):
 
   ```bash
   docker run -it --rm username/image-name:tag /bin/bash
@@ -83,7 +83,7 @@ In this section, you will learn how to configure and customize the Kubiya Agent 
 
 ### Dockerfile
 The [Dockerfile](Dockerfile) is responsible for building the Docker image for the custom Kubiya Agent.
-You can customize the Dockerfile to include additional tools and configurations.
+You can customize the Dockerfile to include additional layers and configurations.
 
 ### entry.sh Script
 This [entry.sh](entry.sh) script is the entrypoint for the Docker container.
@@ -115,7 +115,7 @@ The Agent's Dockerfile includes the following tools:
 ### Customizing the Agent
 You can customize the agent by adding your own tools and configurations to the Dockerfile and entry.sh script.
 
-For example, for terraform you can add the following tools to the Dockerfile:
+For example, for terraform you can add the following layers to the Dockerfile:
 ```Dockerfile 
 # Install terraform
 
