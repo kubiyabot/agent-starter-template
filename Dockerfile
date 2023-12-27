@@ -1,5 +1,4 @@
-FROM kubiya/base-profile:latest # TODO: Change ghcr.io/agent-core:latest
-
+FROM ghcr.io/kubiyabot/connection-agent-core:934f77177849e576cc049580ee62bcfd806fae4e
 USER root
 
 # Copy entry.sh
