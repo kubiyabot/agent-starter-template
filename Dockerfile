@@ -1,4 +1,4 @@
-FROM ghcr.io/kubiyabot/connection-agent-core:934f77177849e576cc049580ee62bcfd806fae4e
+FROM ghcr.io/kubiyabot/connections-agent-core:stable
 USER root
 
 # Copy entry.sh
