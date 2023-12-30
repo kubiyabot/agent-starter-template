@@ -28,14 +28,14 @@ It is designed to be used as a base image for creating custom Kubiya Agents with
 
 Before using the agent, ensure you have the following :
 - [Docker](https://www.docker.com/get-started/) installed on your machine.
-- Access to the Kubiya's [ghcr.io/kubiyabot/connection-agent-core](https://github.com/kubiyabot/connections/pkgs/container/connection-agent-core) image:
+- Access to the Kubiya's [ghcr.io/kubiyabot/connections-agent-core](https://github.com/kubiyabot/connections/pkgs/container/connections-agent-core) image:
   ```shell
   docker pull ghcr.io/kubiyabot/connection-agent-core:934f77177849e576cc049580ee62bcfd806fae4e
   ```
   Should result in : 
   ```shell
-  Status: Downloaded newer image for ghcr.io/kubiyabot/connection-agent-core:934f77177849e576cc049580ee62bcfd806fae4e
-  ghcr.io/kubiyabot/connection-agent-core:934f77177849e576cc049580ee62bcfd806fae4e
+  Status: Downloaded newer image for ghcr.io/kubiyabot/connections-agent-core:stable
+  ghcr.io/kubiyabot/connections-agent-core:stable
   ```
 - Kubiya runner installed on your cluster.   
 For more information, see the [Kubiya runner documentation](https://docs.kubiya.ai/gen-2-docs/connectors/custom-connections/action-runners).
@@ -55,13 +55,6 @@ Follow these steps to set up and run Kubiya locally.
     ```shell
     docker build -t username/image-name:tag .
     ```
-  
-### Running the Container
-- If you want to inspect the agent's Docker container , use the following command (replace ```username/image-name:tag``` with your own image name and tag):
-
-  ```bash
-  docker run -it --rm username/image-name:tag /bin/bash
-  ```
 
 ## Configuration
 In this section, you will learn how to configure and customize the Kubiya Agent starter template.
