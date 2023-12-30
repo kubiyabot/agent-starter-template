@@ -29,13 +29,13 @@ else
     echo "Argo CD login failed - probably not installed."
 fi
 
-# Snyk login
-echo "Attempting to set up Snyk cli"
-if snyk config set api=${SNYK_TOKEN}; then
-    echo "Logged into Snyk successfully."
-else
-    echo "Snyk login failed - please check your token"
-fi
+## Snyk login
+#echo "Attempting to set up Snyk cli"
+#if snyk config set api=${SNYK_TOKEN}; then
+#    echo "Logged into Snyk successfully."
+#else
+#    echo "Snyk login failed - please check your token"
+#fi
 
 # Run the main application
 echo "Starting Kubiya Agent - Version: ${VERSION} (https://docs.kubiya.ai)"
