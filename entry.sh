@@ -5,13 +5,11 @@ set -o pipefail
 # Agent configuration
 VERSION=${VERSION:-"0.1.1"}
 
-APISERVER=https://kubernetes.default.svc
+  APISERVER=https://kubernetes.default.svc
 SERVICEACCOUNT=/var/run/secrets/kubernetes.io/serviceaccount
 NAMESPACE=$(cat ${SERVICEACCOUNT}/namespace)
 TOKEN=$(cat ${SERVICEACCOUNT}/token)
 CACERT=${SERVICEACCOUNT}/ca.crt
-
-SNYK_TOKEN=${SNYK_TOKEN}
 
 
 # Configure kubectl
