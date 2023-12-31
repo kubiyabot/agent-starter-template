@@ -2,22 +2,7 @@
 ![Kubiya](https://avatars.githubusercontent.com/u/87862858?s=200&v=4)
 # Kubiya Agent Starter Template
 
-![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
-![Terraform Badge](https://img.shields.io/badge/Terraform-844FBA?logo=terraform&logoColor=fff&style=for-the-badge)
-![Kubernetes](https://img.shields.io/badge/kubernetes-%23326ce5.svg?style=for-the-badge&logo=kubernetes&logoColor=white)
-![GITHUB](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)
-![JIRA](https://img.shields.io/badge/Jira-0052CC?style=for-the-badge&logo=jira&logoColor=white)
 
-![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
-![ARGOCD](https://img.shields.io/badge/ArgoCD-93C0D0?style=for-the-badge&logo=argocd&logoColor=white)
-![JFrog](https://img.shields.io/badge/JFrog-43BF47?style=for-the-badge&logo=jfrog&logoColor=white)
-![Slack](https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white)
-![Snyk Badge](https://img.shields.io/badge/Snyk-4C4A73?logo=snyk&logoColor=fff&style=for-the-badge)
-![Helm](https://img.shields.io/badge/Helm-0F1689?logo=helm&logoColor=fff&style=for-the-badge)
-
-![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
-![Google Cloud](https://img.shields.io/badge/GoogleCloud-%234285F4.svg?style=for-the-badge&logo=google-cloud&logoColor=white)
-![Confluence Badge](https://img.shields.io/badge/Confluence-172B4D?logo=confluence&logoColor=fff&style=for-the-badge)
 ## Table of Contents
 
 - [Introduction](#introduction)
@@ -43,14 +28,14 @@ It is designed to be used as a base image for creating custom Kubiya Agents with
 
 Before using the agent, ensure you have the following :
 - [Docker](https://www.docker.com/get-started/) installed on your machine.
-- Access to the Kubiya's [ghcr.io/kubiyabot/connection-agent-core](https://github.com/kubiyabot/connections/pkgs/container/connection-agent-core) image:
+- Access to the Kubiya's [ghcr.io/kubiyabot/connections-agent-core](https://github.com/kubiyabot/connections/pkgs/container/connections-agent-core) image:
   ```shell
   docker pull ghcr.io/kubiyabot/connection-agent-core:934f77177849e576cc049580ee62bcfd806fae4e
   ```
   Should result in : 
   ```shell
-  Status: Downloaded newer image for ghcr.io/kubiyabot/connection-agent-core:934f77177849e576cc049580ee62bcfd806fae4e
-  ghcr.io/kubiyabot/connection-agent-core:934f77177849e576cc049580ee62bcfd806fae4e
+  Status: Downloaded newer image for ghcr.io/kubiyabot/connections-agent-core:stable
+  ghcr.io/kubiyabot/connections-agent-core:stable
   ```
 - Kubiya runner installed on your cluster.   
 For more information, see the [Kubiya runner documentation](https://docs.kubiya.ai/gen-2-docs/connectors/custom-connections/action-runners).
@@ -70,13 +55,6 @@ Follow these steps to set up and run Kubiya locally.
     ```shell
     docker build -t username/image-name:tag .
     ```
-  
-### Running the Container
-- If you want to inspect the agent's Docker container , use the following command (replace ```username/image-name:tag``` with your own image name and tag):
-
-  ```bash
-  docker run -it --rm username/image-name:tag /bin/bash
-  ```
 
 ## Configuration
 In this section, you will learn how to configure and customize the Kubiya Agent starter template.
