@@ -5,9 +5,6 @@ on:
     branches:
       - main
       - DEV-**
-      # paths-ignore:
-      #   - '.github/**'
-      #   - '.git/**'
 
 jobs:
   build-and-push:
@@ -60,7 +57,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.GHCR_GITHUB_TOKEN }}
 
       - name: Push to GHCR
         if: ${{ matrix.registry == 'ghcr' }}
