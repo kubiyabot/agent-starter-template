@@ -1,10 +1,9 @@
-name: Build and Push main
+name: Build and Push development Docker image
 
 on:
   push:
-    branches:
+    branches-ignore:
       - main
-      - DEV-**
 
 jobs:
   build-and-push:
