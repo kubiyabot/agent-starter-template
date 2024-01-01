@@ -5,16 +5,16 @@ on:
     branches:
       - main
       - DEV-**
-    paths-ignore:
-      - '.github/**'
-      - '.git/**'
+    # paths-ignore:
+    #   - '.github/**'
+    #   - '.git/**'
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        platform: [linux/amd64, linux/arm64]
+        platform: [linux/amd64]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
