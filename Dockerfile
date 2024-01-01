@@ -14,6 +14,12 @@ RUN apt update && apt install -y \
     wget \
     binutils
 
+# copy requirements file
+COPY ./requirements.txt /requirements.txt
+
+# Install python env libraries
+RUN /usr/local/bin/pip install --no-cache-dir -r /requirements.txt
+
 # Install tools
 RUN \
     # Install kubectl
