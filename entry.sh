@@ -11,8 +11,6 @@ NAMESPACE=$(cat ${SERVICEACCOUNT}/namespace)
 TOKEN=$(cat ${SERVICEACCOUNT}/token)
 CACERT=${SERVICEACCOUNT}/ca.crt
 
-SNYK_TOKEN=${SNYK_TOKEN}
-
 
 # Configure kubectl
 kubectl config set-cluster cfc --server=${APISERVER} --certificate-authority=${CACERT}

@@ -64,61 +64,60 @@ The [Dockerfile](Dockerfile) is responsible for building the Docker image for th
 You can customize the Dockerfile to include additional layers and configurations.
 
 ### entry.sh Script
-This [entry.sh](entry.sh) script is the entrypoint for the Docker container.
+This [entry.sh](entry.sh) script is the entrypoint for the Docker container. It's used for tools which require additional configuration during runtime
+
 For more information about entrypoints, see the [Docker documentation](https://docs.docker.com/engine/reference/builder/#entrypoint).
 
 ### Tools Installed
 The Agent's Dockerfile includes the following tools:
 
-| Tool               | Description          | Setup in entry.sh script                                                |
-|--------------------|----------------------|------------------------------------------------------------------------|
+| Tool               | Description          | Setup in entry.sh script                                                                |
+|--------------------|----------------------|-----------------------------------------------------------------------------------------|
 | [kubectl](https://kubernetes.io/docs/reference/kubectl/kubectl/) | Kubernetes CLI       | Configures kubectl with cluster and credentials using environment variables in entry.sh |
-| [aws cli](https://aws.amazon.com/cli/) | AWS CLI              | -                                                                      |
-| [github cli](https://cli.github.com/) | GitHub CLI           | -                                                                      |
-| [terraform cli](https://www.terraform.io/docs/cli/index.html) | Terraform CLI        | -                                                                      |
-| [helm](https://helm.sh/docs/intro/quickstart/) | Kubernetes Helm      | -                                                                      |
-| [jira cli](https://developer.atlassian.com/server/jira/platform/cli/) | Jira CLI             | -                                                                      |
-| [slack cli](https://github.com/rockymadden/slack-cli) | Slack CLI            | -                                                                      |
-| [argocd cli](https://argoproj.github.io/argo-cd/cli_installation/) | ArgoCD CLI           | Logs into Argo CD with in-cluster access using `argocd login --core`    |
-| [jfrog cli](https://www.jfrog.com/confluence/display/JFROG/CLI+for+JFrog+Artifactory) | JFrog CLI            | -                                                                      |
-| [snyk cli](https://support.snyk.io/hc/en-us/articles/360004008258-Install-the-Snyk-CLI) | Snyk CLI             | Logs into Snyk using `snyk config set api=${SNYK_TOKEN}`                |
-| [git](https://git-scm.com/doc) | Git                  | -                                                                      |
-| [python3](https://docs.python.org/3/) | Python 3             | -                                                                      |
-| [google cloud cli](https://cloud.google.com/sdk/docs/quickstarts) | Google Cloud CLI     | -                                                                      |
-| [jq](https://stedolan.github.io/jq/manual/) | JSON processor       | -                                                                      |
-| [gpg](https://www.gnupg.org/documentation/manuals/gnupg/) | GnuPG                | -                                                                      |
-| [curl](https://curl.se/docs/) | Command-line tool    | -                                                                      |
+| [aws cli](https://aws.amazon.com/cli/) | AWS CLI              | -                                                                                       |
+| [github cli](https://cli.github.com/) | GitHub CLI           | -                                                                                       |
+| [terraform cli](https://www.terraform.io/docs/cli/index.html) | Terraform CLI        | -                                                                                       |
+| [helm](https://helm.sh/docs/intro/quickstart/) | Kubernetes Helm      | -                                                                                       |
+| [jira cli](https://developer.atlassian.com/server/jira/platform/cli/) | Jira CLI             | -                                                                                       |
+| [slack cli](https://github.com/rockymadden/slack-cli) | Slack CLI            | -                                                                                       |
+| [argocd cli](https://argoproj.github.io/argo-cd/cli_installation/) | ArgoCD CLI           | Logs into Argo CD with in-cluster access using `argocd login --core`                    |
+| [jfrog cli](https://www.jfrog.com/confluence/display/JFROG/CLI+for+JFrog+Artifactory) | JFrog CLI            | -                                                                                       |
+| [snyk cli](https://support.snyk.io/hc/en-us/articles/360004008258-Install-the-Snyk-CLI) | Snyk CLI             | -                                                                                       |
+| [git](https://git-scm.com/doc) | Git                  | -                                                                                       |
+| [python3](https://docs.python.org/3/) | Python 3             | -                                                                                       |
+| [google cloud cli](https://cloud.google.com/sdk/docs/quickstarts) | Google Cloud CLI     | -                                                                                       |
+| [jq](https://stedolan.github.io/jq/manual/) | JSON processor       | -                                                                                       |
+| [gpg](https://www.gnupg.org/documentation/manuals/gnupg/) | GnuPG                | -                                                                                       |
+| [curl](https://curl.se/docs/) | Command-line tool    | -                                                                                       |
 
 
 ### Customizing the Agent
 You can customize the agent by adding your own tools and configurations to the Dockerfile and entry.sh script.
 
-For example, for terraform you can add the following layers to the Dockerfile:
+For example, for kubectl the layers in the Dockerfile:
 ```Dockerfile 
-# Install terraform
-
-RUN wget https://releases.hashicorp.com/terraform/1.6.2/terraform_1.6.2_linux_amd64.zip && \
-unzip -o terraform_1.6.2_linux_amd64.zip -d /usr/local/bin/ && \
-
-#Set permissions
-chmod +x /usr/local/bin/terraform && \
-
-#Clean up
-rm -rf terraform_1.6.2_linux_amd64.zip
-
-# appuser is the user that will run the terraform commands
-RUN chown appuser /usr/local/bin/terraform && \
+RUN \
+    # Install kubectl
+    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && \
+    chmod +x ./kubectl && \
+    mv ./kubectl /usr/local/bin/kubectl && \
 ```
-You can also add your own scripts to the entry.sh script:
+At entry.sh script add the following lines to configure kubectl:
 ```bash
-# check if terraform state file exists
+# Set APISERVER
+APISERVER=https://kubernetes.default.svc
 
-if [ ! -f "/code/dist/main/terraform.tfstate" ]; then
-    echo "Error: Terraform state file not found."
-    exit 1
-else 
-    echo "Terraform state file found."
-fi
+# Get token and ca.crt from mounted service account
+SERVICEACCOUNT=/var/run/secrets/kubernetes.io/serviceaccount
+TOKEN=$(cat ${SERVICEACCOUNT}/token)
+CACERT=${SERVICEACCOUNT}/ca.crt
+
+# Configure kubectl
+kubectl config set-cluster cfc --server=${APISERVER} --certificate-authority=${CACERT}
+kubectl config set-context cfc --cluster=cfc
+kubectl config set-credentials user --token=${TOKEN}
+kubectl config set-context cfc --user=user
+kubectl config use-context cfc
 ```
 
 ## Contributing
