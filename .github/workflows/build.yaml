@@ -26,12 +26,18 @@ jobs:
       - name: Set IMAGE_TAG_SHA
         run: echo "IMAGE_TAG_SHA=$(echo ${{ github.sha }} | cut -c1-8)" >> $GITHUB_ENV
 
+      - name: Set DOCKER_IMAGE_NAME
+        run: echo "DOCKER_IMAGE_NAME=kubiya/base-agent:${{ env.IMAGE_TAG_SHA }}" >> $GITHUB_ENV
+      
+      - name: Set GHCR_IMAGE_NAME
+        run: echo "GHCR_IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/kubiya-agent:${{ env.IMAGE_TAG_SHA }}" >> $GITHUB_ENV
+
       - name: Build Docker image
         run: |
-          IMAGE_NAME="kubiya/base-agent:${{ env.IMAGE_TAG_SHA }}"
           docker buildx build \
             --platform ${{ matrix.platform }} \
-            --tag $IMAGE_NAME \
+            --tag $DOCKER_IMAGE_NAME \
+            --tag $GHCR_IMAGE_NAME \
             --load .
 
       # Docker Hub
@@ -45,8 +51,7 @@ jobs:
       - name: Push to Docker Hub
         if: ${{ matrix.registry == 'dockerhub' }}
         run: |
-          IMAGE_NAME="kubiya/base-agent:${{ env.IMAGE_TAG_SHA }}"
-          docker push $IMAGE_NAME
+          docker push $DOCKER_IMAGE_NAME
 
       # GitHub Container Registry
       - name: Login to GHCR
@@ -60,6 +65,5 @@ jobs:
       - name: Push to GHCR
         if: ${{ matrix.registry == 'ghcr' }}
         run: |
-          IMAGE_NAME="ghcr.io/${{ github.repository_owner }}/kubiya-agent:${{ env.IMAGE_TAG_SHA }}"
-          docker push $IMAGE_NAME
+          docker push $GHCR_IMAGE_NAME
       
