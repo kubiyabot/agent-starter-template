@@ -27,6 +27,9 @@ else
     echo "Argo CD login failed - probably not installed."
 fi
 
+# Utility environment variables
+export TF_CLI_ARGS='-no-color'
+
 # Run the main application
 echo "Starting Kubiya Agent - Version: ${VERSION} (https://docs.kubiya.ai)"
 if [ ! -x "/code/dist/main/main" ]; then
