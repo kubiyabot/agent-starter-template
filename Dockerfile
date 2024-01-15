@@ -1,5 +1,5 @@
 # Use the specified base image
-FROM 564407622114.dkr.ecr.eu-west-1.amazonaws.com/connection-agent-core:latest
+FROM ghcr.io/kubiyabot/connections-agent-core:stable
 USER root
 
 # Copy entry.sh
