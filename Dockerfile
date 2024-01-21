@@ -1,5 +1,5 @@
 # Use the specified base image
-FROM ghcr.io/kubiyabot/connections-agent-core:stable
+FROM ghcr.io/kubiyabot/connections-agent-core:97fa3b68d3a21c6e6fadc65dc6cbe99d085a6410
 USER root
 
 # Copy entry.sh
