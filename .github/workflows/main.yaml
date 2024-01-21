@@ -46,7 +46,8 @@ jobs:
       - name: Push to Docker Hub
         if: ${{ matrix.registry == 'dockerhub' }}
         run: |
-          docker push $DOCKER_IMAGE_NAME
+          docker push $DOCKER_IMAGE_NAME 
+          docker push kubiya/base-agent:latest
 
       # GitHub Container Registry
       - name: Login to GHCR
