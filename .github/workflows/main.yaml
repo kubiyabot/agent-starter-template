@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      # - aws
   workflow_dispatch:
 
 jobs:
